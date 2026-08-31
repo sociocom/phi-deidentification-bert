@@ -1,0 +1,28 @@
+model:
+  name: sbintuitions/modernbert-ja-310m
+  max_length: 1024
+
+labels:
+  - phi_age
+  - phi_id
+  - phi_tel
+  - phi_job
+  - phi_location
+  - phi_person
+  - phi_hospital
+
+train:
+  seed: 42
+  data_path: .data/NTCIR10-17_train_v2_argumented_20260830.txt
+  eval_strategy: "epoch" # epoch | no
+  learning_rate: 1e-5
+  per_device_batch_size: 8
+  num_train_epochs: 3
+  weight_decay: 0.01
+  warmup_steps: 0.1
+  output_dir: out
+
+inference:
+  data_path: .data/test.txt
+  model_dir: out
+  batch_size: 1

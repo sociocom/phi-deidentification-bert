@@ -1,0 +1,9 @@
+.idea
+.venv
+__pycache__
+volume/
+.env
+.env.*
+!.env.example
+.data
+out

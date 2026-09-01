@@ -26,3 +26,4 @@ inference:
   data_path: .data/test.txt
   model_dir: out
   batch_size: 1
+  output_path: .data/test-result.txt

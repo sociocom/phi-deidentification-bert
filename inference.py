@@ -1,7 +1,7 @@
 import sys
 
-from omegaconf import OmegaConf
 import torch
+from omegaconf import OmegaConf
 from transformers import pipeline
 
 num_table = str.maketrans(
@@ -39,15 +39,19 @@ def run():
             label = entity["entity_group"]
 
             tagged_text = (
-                    tagged_text[:start]
-                    + f"<{label}>"
-                    + tagged_text[start:end]
-                    + f"</{label}>"
-                    + tagged_text[end:]
+                tagged_text[:start]
+                + f"<{label}>"
+                + tagged_text[start:end]
+                + f"</{label}>"
+                + tagged_text[end:]
             )
 
         tagged_texts.append(tagged_text)
 
+    with open(cfg.inference.output_path, "w", encoding="utf-8") as f:
+        for tagged_text in tagged_texts:
+            f.write(tagged_text + "\n")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run()

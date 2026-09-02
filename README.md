@@ -26,17 +26,22 @@ uv sync
 
 `configs/sample.yaml`をコピーしてconfigを作成します。
 
-学習データは、１行１サンプルのplain-textです。
+学習データは、１行１サンプルのタグ付きテキストです。
 ```
 息子<phi_age>32歳</phi_age>生活習慣病の疑い
 右眼の傷が悪化し、<phi_hospital>青山町中央病院</phi_hospital>眼科<phi_person>佐々木</phi_person>先生を受診した。
 ...
 ```
 
+タグの種類は、configの`labels`で管理しますので、学習データに合わせて修正してください。
+
 以下で実行します。
 ```
 python train.py configs/sample.yaml
 ```
+
+学習が完了したら、configの`train.output_dir`にモデルファイルが出力されます。
+
 
 ## 推論
 テストデータは、１行１サンプルのplain-textです。
@@ -45,6 +50,12 @@ python train.py configs/sample.yaml
 佐々木ゆりさんから画像CDが届いた。
 ...
 ```
+
+configの`inference.model_dir`に、学習されたモデルのディレクトリパスを指定します。
+通常は、`train.output_dir`と同じです。
+
+テストデータのパスは、`inference.data_path`に指定します。
+推論結果は、`inference.output_path`にテキストファイルのパスを指定します。
 
 以下で実行します。
 ```
